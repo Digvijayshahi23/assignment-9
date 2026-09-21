@@ -36,7 +36,7 @@ const SecurityView = () => {
 
   const fetchLogs = async () => {
     try {
-      const res = await axios.get('http://localhost:5001/api/passes/logs');
+      const res = await axios.get('/api/passes/logs');
       setLogs(res.data);
     } catch (err) {
       console.error(err);
@@ -45,7 +45,7 @@ const SecurityView = () => {
 
   const handleScan = async (passId) => {
     try {
-      const res = await axios.post('http://localhost:5001/api/passes/scan', { passId });
+      const res = await axios.post('/api/passes/scan', { passId });
       setScanResult({ success: res.data.message });
       fetchLogs();
       

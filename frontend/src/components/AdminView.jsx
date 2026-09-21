@@ -14,11 +14,11 @@ const AdminView = () => {
 
   const fetchData = async () => {
     try {
-      const usersRes = await axios.get('http://localhost:5001/api/users');
+      const usersRes = await axios.get('/api/users');
       setUsers(usersRes.data);
       
-      const aptRes = await axios.get('http://localhost:5001/api/appointments');
-      const passRes = await axios.get('http://localhost:5001/api/passes');
+      const aptRes = await axios.get('/api/appointments');
+      const passRes = await axios.get('/api/passes');
       
       setStats({
         users: usersRes.data.length,

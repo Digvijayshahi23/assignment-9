@@ -16,11 +16,11 @@ const VisitorPortal = () => {
       // First get visitor by email, then get passes for that visitor.
       // Alternatively, just expose an endpoint /api/passes/visitor/:email
       // Since we don't have that endpoint, let's fetch all and filter for now (bad practice for prod, fine for demo without auth).
-      const visitorRes = await axios.get('http://localhost:5001/api/visitors');
+      const visitorRes = await axios.get('/api/visitors');
       const visitor = visitorRes.data.find(v => v.email === email);
       
       if (visitor) {
-        const passRes = await axios.get('http://localhost:5001/api/passes');
+        const passRes = await axios.get('/api/passes');
         const visitorPasses = passRes.data.filter(p => p.visitor._id === visitor._id);
         setPasses(visitorPasses);
       } else {

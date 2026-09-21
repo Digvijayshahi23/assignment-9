@@ -14,7 +14,7 @@ const HostView = () => {
 
   const fetchAppointments = async () => {
     try {
-      const res = await axios.get('http://localhost:5001/api/appointments');
+      const res = await axios.get('/api/appointments');
       setAppointments(res.data);
     } catch (err) {
       console.error(err);
@@ -25,12 +25,12 @@ const HostView = () => {
     e.preventDefault();
     try {
       // 1. Create or get visitor
-      const visitorRes = await axios.post('http://localhost:5001/api/visitors', {
+      const visitorRes = await axios.post('/api/visitors', {
         name: formData.name, email: formData.email, phone: formData.phone, company: formData.company
       });
       
       // 2. Create appointment
-      await axios.post('http://localhost:5001/api/appointments', {
+      await axios.post('/api/appointments', {
         visitorId: visitorRes.data._id,
         purpose: formData.purpose,
         scheduledDate: formData.scheduledDate,
@@ -79,9 +79,9 @@ const HostView = () => {
                   {apt.status === 'pending' && (
                     <button className="btn btn-success" style={{ padding: '4px 8px', fontSize: '12px' }}
                       onClick={async () => {
-                        await axios.put(`http://localhost:5001/api/appointments/${apt._id}`, { status: 'approved' });
+                        await axios.put(`/api/appointments/${apt._id}`, { status: 'approved' });
                         // Issue pass
-                        await axios.post('http://localhost:5001/api/passes/issue', {
+                        await axios.post('/api/passes/issue', {
                           appointmentId: apt._id,
                           validFrom: new Date(),
                           validUntil: new Date(new Date().setHours(23, 59, 59, 999)) // valid today
